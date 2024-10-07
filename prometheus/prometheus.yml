@@ -59,7 +59,7 @@ scrape_configs:
   - job_name: 'pve'
     static_configs:
       - targets:
-        - 192.168.78.240:9221  # Хост 1 Proxmox VE с PVE exporter
+        - 192.168.78.240:9221  # Host 1 Proxmox VE with PVE exporter
     metrics_path: /pve
     params:
       module: [default]

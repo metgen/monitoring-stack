@@ -10,7 +10,7 @@ services:
     volumes:
       - './mktxp/:/root/mktxp/'
     networks:
-      mktxp: null
+      monitoring: null
     restart: unless-stopped  
 
   grafana:
@@ -22,7 +22,7 @@ services:
     - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/etc/grafana/provisioning/dashboards/mikrotik/mikrotik_mxtxp_monitoring.json
     image: grafana/grafana:latest
     networks:
-      mktxp: null
+      monitoring: null
     ports:
     - protocol: tcp
       published: 3003
@@ -38,7 +38,7 @@ services:
     container_name: loki
     image: grafana/loki:latest
     networks:
-      mktxp: null
+      monitoring: null
     ports:
     - protocol: tcp
       published: 3100
@@ -57,7 +57,7 @@ services:
     container_name: prometheus
     image: prom/prometheus:latest
     networks:
-      mktxp: null
+      monitoring: null
     ports:
     - published: 9090
       target: 9090
@@ -71,7 +71,7 @@ services:
     container_name: promtail
     image: grafana/promtail:latest
     networks:
-      mktxp: null
+      monitoring: null
     ports:
     - protocol: tcp
       published: 1514
@@ -90,7 +90,7 @@ services:
     - promtail
     image: balabit/syslog-ng:latest
     networks:
-      mktxp: null
+      monitoring: null
     ports:
     - protocol: udp
       published: 514
@@ -109,7 +109,7 @@ services:
     volumes:
     - ./blackbox/blackbox.yml:/config/blackbox.yml
     networks:
-      mktxp: null
+      monitoring: null
     ports:
     - protocol: tcp
       published: 9115
@@ -117,4 +117,4 @@ services:
     restart: unless-stopped
 
 networks:
-  mktxp: {}
+  monitoring: {}
